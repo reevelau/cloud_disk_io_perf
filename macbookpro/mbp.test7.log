@@ -1,0 +1,31 @@
+test7: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=posixaio, iodepth=1
+fio-3.15
+Starting 1 thread
+
+test7: (groupid=0, jobs=1): err= 0: pid=5123: Sun Aug 25 21:09:20 2019
+  write: IOPS=371, BW=1487KiB/s (1523kB/s)(436MiB/300013msec)
+    slat (nsec): min=1057, max=2540.8k, avg=5745.89, stdev=23067.46
+    clat (nsec): min=1513, max=1836.0M, avg=2682113.02, stdev=13658653.28
+     lat (usec): min=9, max=1836.0k, avg=2687.86, stdev=13660.25
+    clat percentiles (nsec):
+     |  1.00th=[     1752],  5.00th=[     2960], 10.00th=[     8512],
+     | 20.00th=[    11200], 30.00th=[    14272], 40.00th=[    16064],
+     | 50.00th=[    16768], 60.00th=[    17792], 70.00th=[    22144],
+     | 80.00th=[    28032], 90.00th=[    63744], 95.00th=[ 23724032],
+     | 99.00th=[ 49545216], 99.50th=[ 53739520], 99.90th=[ 99090432],
+     | 99.95th=[106430464], 99.99th=[189792256]
+   bw (  KiB/s): min=    7, max=72866, per=100.00%, avg=1494.23, stdev=9195.52, samples=589
+   iops        : min=    1, max=18216, avg=373.04, stdev=2298.90, samples=589
+  lat (usec)   : 2=2.09%, 4=4.59%, 10=9.72%, 20=50.13%, 50=22.59%
+  lat (usec)   : 100=1.72%, 250=0.72%, 500=0.19%, 750=0.06%, 1000=0.03%
+  lat (msec)   : 2=0.03%, 4=0.01%, 10=0.78%, 20=1.72%, 50=4.71%
+  lat (msec)   : 100=0.82%, 250=0.09%, 1000=0.01%, 2000=0.01%
+  cpu          : usr=0.33%, sys=0.50%, ctx=178061, majf=0, minf=19
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,111534,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=1487KiB/s (1523kB/s), 1487KiB/s-1487KiB/s (1523kB/s-1523kB/s), io=436MiB (457MB), run=300013-300013msec

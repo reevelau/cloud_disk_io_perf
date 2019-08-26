@@ -1,0 +1,99 @@
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  labels:
+    run: disk-test
+  name: disk-test
+spec:
+  replicas: 1
+  serviceName: ubuntu
+  selector:
+    matchLabels:
+      run: disk-test
+  template:
+    metadata:
+      labels:
+        run: disk-test
+    spec:
+      containers:
+      - args:
+        - bash
+        image: ubuntu:19.04
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        imagePullPolicy: IfNotPresent
+        name: disk-test
+        resources: {}
+        volumeMounts:
+        - mountPath: /data-alicloud-disk-ssd
+          name: disk-alicloud-disk-ssd
+        - mountPath: /data-alicloud-disk-ssd-128
+          name: disk-alicloud-disk-ssd-128
+        - mountPath: /data-alicloud-disk-ssd-250
+          name: disk-alicloud-disk-ssd-250
+        - mountPath: /data-alicloud-disk-efficiency
+          name: disk-alicloud-disk-efficiency
+        - mountPath: /data-nfs-esb
+          name: disk-nfs-esb
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+
+  volumeClaimTemplates:
+  - metadata:
+      creationTimestamp: null
+      name: disk-alicloud-disk-ssd
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      dataSource: null
+      resources:
+        requests:
+          storage: 20Gi
+      storageClassName: alicloud-disk-ssd
+  - metadata:
+      creationTimestamp: null
+      name: disk-alicloud-disk-ssd-128
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      dataSource: null
+      resources:
+        requests:
+          storage: 128Gi
+      storageClassName: alicloud-disk-ssd
+  - metadata:
+      creationTimestamp: null
+      name: disk-alicloud-disk-ssd-250
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      dataSource: null
+      resources:
+        requests:
+          storage: 250Gi
+      storageClassName: alicloud-disk-ssd
+  - metadata:
+      creationTimestamp: null
+      name: disk-alicloud-disk-efficiency
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      dataSource: null
+      resources:
+        requests:
+          storage: 20Gi
+      storageClassName: alicloud-disk-efficiency
+  - metadata:
+      creationTimestamp: null
+      name: disk-nfs-esb
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      dataSource: null
+      resources:
+        requests:
+          storage: 20Gi
+      storageClassName: nfs-esb
